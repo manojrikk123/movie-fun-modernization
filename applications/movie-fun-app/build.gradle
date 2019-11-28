@@ -19,6 +19,10 @@ dependencies {
     compile "taglibs:standard:1.1.2"
     compile "javax.servlet:jstl:1.2"
 
+    compile "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:$springSecurityOAuthAutoconfigVersion"
+    compile "io.pivotal.spring.cloud:spring-cloud-sso-connector:$springCloudSsoVersion"
+    compile "org.springframework.security:spring-security-taglibs"
+
     compile "org.apache.tomcat.embed:tomcat-embed-jasper:8.5.6"
 
     testCompile "junit:junit:$junitVersion"

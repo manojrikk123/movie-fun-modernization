@@ -6,6 +6,9 @@ dependencies {
     compile "org.springframework:spring-tx:$springVersion"
     compile "org.springframework:spring-web:$springVersion"
 
+    compile "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:$springSecurityOAuthAutoconfigVersion"
+    compile "io.pivotal.spring.cloud:spring-cloud-sso-connector:$springCloudSsoVersion"
+
     compile "org.hibernate:hibernate-core:$hibernateVersion"
     compile "javax.servlet:javax.servlet-api:3.1.0"
     compile "org.slf4j:slf4j-api:$slf4jVersion"
