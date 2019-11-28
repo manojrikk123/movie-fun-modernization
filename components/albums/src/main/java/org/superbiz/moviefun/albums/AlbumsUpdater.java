@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.superbiz.moviefun.CsvUtils;
-import org.superbiz.moviefun.blobstore.Blob;
-import org.superbiz.moviefun.blobstore.BlobStore;
+//import org.superbiz.moviefun.blobstore.Blob;
+//import org.superbiz.moviefun.blobstore.BlobStore;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,10 +23,11 @@ public class AlbumsUpdater {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final ObjectReader objectReader;
-    private final BlobStore blobStore;
-    private final AlbumsBean albumsBean;
+    //private final BlobStore blobStore;
+    private final AlbumsRepository albumsBean;
 
-    public AlbumsUpdater(BlobStore blobStore, AlbumsBean albumsBean) {
+    /*
+    public AlbumsUpdater(BlobStore blobStore, AlbumsRepository albumsBean) {
         this.blobStore = blobStore;
         this.albumsBean = albumsBean;
 
@@ -39,7 +40,23 @@ public class AlbumsUpdater {
 
         objectReader = new CsvMapper().readerFor(Album.class).with(schema);
     }
+    *
+    */
 
+    public AlbumsUpdater(AlbumsRepository albumsBean) {
+        this.albumsBean = albumsBean;
+
+        CsvSchema schema = builder()
+                .addColumn("artist")
+                .addColumn("title")
+                .addColumn("year", ColumnType.NUMBER)
+                .addColumn("rating", ColumnType.NUMBER)
+                .build();
+
+        objectReader = new CsvMapper().readerFor(Album.class).with(schema);
+    }
+
+    /*
     public void update() throws IOException {
         Optional<Blob> maybeBlob = blobStore.get("albums.csv");
 
@@ -55,6 +72,8 @@ public class AlbumsUpdater {
         deleteOldAlbums(albumsToHave, albumsWeHave);
         updateExistingAlbums(albumsToHave, albumsWeHave);
     }
+
+     */
 
 
     private void createNewAlbums(List<Album> albumsToHave, List<Album> albumsWeHave) {
